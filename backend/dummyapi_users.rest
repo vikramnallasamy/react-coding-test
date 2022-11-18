@@ -1,0 +1,9 @@
+
+https://dummyjson.com/users/filter?key=hair.color&value=Brown,key=gender&value=male
+
+###
+
+https://dummyjson.com/users
+
+###
+https://dummyjson.com/users/search?q=John
