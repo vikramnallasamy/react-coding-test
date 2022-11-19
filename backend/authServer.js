@@ -8,7 +8,7 @@ app.use(express.json())
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000','http://localhost:3001']
 }));
 
 let refreshTokens = {}

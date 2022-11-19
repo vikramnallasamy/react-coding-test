@@ -1,4 +1,4 @@
-import { LOGIN } from "../constants/constants"
+import { LOGIN } from "./constants"
 
 export const logIn = (username,password) => ({
     type : LOGIN,

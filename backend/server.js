@@ -9,7 +9,7 @@ app.use(express.json())
 
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: ['http://localhost:3000', 'http://localhost:3001']
 }));
 
 const fetchUserExternal = (res) => {
@@ -29,6 +29,13 @@ const fetchUserExternal = (res) => {
 });
 }
 
+app.get('/getProfile',verifyToken,(req, res)=>{
+    const user = users.find((user)=> {
+        return user.name === req.user.username
+    })
+    // fetchUserExternal(res)
+    res.send(user)
+})
 app.get('/getusers',verifyToken,(req, res)=>{
     const user = users.filter((user)=> {
         return user.name === req.user.username
@@ -39,9 +46,9 @@ app.get('/getusers',verifyToken,(req, res)=>{
 function verifyToken(req,res,next) {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
-    if(!token) return res.status(401).send('Token required')
+    if(!token) return res.status(401).send({errorMessage:'Token required'})
     jwt.verify(token,process.env.ACCESS_TOKEN_SECRET,(err,user)=> {
-        if(err) return res.status(403).send('Invalid token')
+        if(err) return res.status(403).send({errorMessage:'Invalid token'})
         req.user = user
         next()
     })

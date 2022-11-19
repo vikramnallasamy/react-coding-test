@@ -1,5 +1,5 @@
 const users = [{
-    name :'John',
+    name :'john',
     title :'product 1'
 },{
     name : 'david',

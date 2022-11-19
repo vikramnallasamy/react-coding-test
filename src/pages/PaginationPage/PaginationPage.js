@@ -12,9 +12,6 @@ const PaginationPage = (props) => {
     const [isError,setIsError] = useState(false)
     const token = props.accessToken
     useEffect(()=>{
-        // fetch({url: 'http://localhost:5000/getusers'}).then(res=>res.json()).then(users=>{
-        //     setUsers(users)
-        // })
         setIsLoading(true)
         fetch('http://localhost:5000/getusers', {
             method: 'GET',
@@ -22,7 +19,6 @@ const PaginationPage = (props) => {
                 'Content-type': 'application/json',
                 'Authorization': `Bearer ${token}`, // notice the Bearer before your token
             },
-            // body: JSON.stringify(yourNewData)
         }).then(res=>res.json()).then(users=>{
                 setUsers(users)
                 setIsLoading(false)
@@ -35,9 +31,12 @@ const PaginationPage = (props) => {
     const currentTableData = useMemo(() => {
       const firstPageIndex = (currentPage - 1) * PageSize;
       const lastPageIndex = firstPageIndex + PageSize;
-      return users.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage])
+      return users.length > 0 ? users.slice(firstPageIndex, lastPageIndex) : []
+    }, [currentPage,users])
 
+    if(users && users.errorMessage) {
+      return <h2>{users.errorMessage}... Refresh and Login Again</h2>
+    }
     if(isError){
         return <h2>Error Loading users...</h2>
     }
@@ -47,7 +46,8 @@ const PaginationPage = (props) => {
   return (
     <>
       <h1>Pagination Page</h1>
-      <Table data={users}/>
+      <h4>Passing access token to get the users list</h4>
+      <Table data={currentTableData}/>
       <Pagination
         className="pagination-bar"
         currentPage={currentPage}

@@ -7,12 +7,12 @@ POST http://localhost:5001/login
 Content-Type: application/json
 
 {
-    "username" : "vikram"
+    "username" : "john"
 }
 ###
 
 GET http://localhost:5000/getusers
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InZpa3JhbSIsImlhdCI6MTY2ODc3MzMyMywiZXhwIjoxNjY4NzczNDQzfQ.F6mYJK4O3IDKWoPs80EiMay1Ay2wPQWcCuJkUEdnhxQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImpvaG4iLCJpYXQiOjE2Njg4NDU5MDAsImV4cCI6MTY2ODg0NjAyMH0.XT6I64THtSVvbR0R0ioPifDb7Zzddv9aQzCjosUnswA
 
 
 ###

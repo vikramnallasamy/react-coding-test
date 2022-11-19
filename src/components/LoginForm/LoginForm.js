@@ -1,11 +1,12 @@
 import { useForm } from 'react-hook-form'
 import { connect } from 'react-redux';
 import InputFieldRHF from '../InputFieldRHF/InputFieldRHF'
-import { logIn } from '../../actions/actions'
+import { logIn } from '../../ReduxSaga/Saga/actions'
 
 
 const LoginForm = (props) => {
     const { register, handleSubmit, formState: { errors } } = useForm();
+
     const handleLogin = (data) => {
         console.log(data);
         props.logIn(data.username,data.password)
@@ -22,6 +23,7 @@ const LoginForm = (props) => {
                     <InputFieldRHF label={'Password'} name='password' type={'password'} errors={errors} register={register}/>    
                 </div>
                 <button disabled={props.isLoading}>Submit</button>
+                <p style={{color:'red'}}>{props.errorMessage}</p>
             </form>
         </>
     );
@@ -31,7 +33,8 @@ const LoginForm = (props) => {
       return {
           isLoggedIn : state.isLoggedIn,
           isLoading : state.isLoading,
-          username : state.username
+          username : state.username,
+          errorMessage: state.errorMessage
       }
     
   }

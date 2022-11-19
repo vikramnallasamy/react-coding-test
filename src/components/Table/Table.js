@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const Table = ({data}) => {
-    if(!data) {
+    if(!data || !data?.length) {
         return null
     }
     return (
